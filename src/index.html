@@ -1,24 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Adalab Web Starter Kit</title>
 
-    <link rel="stylesheet" href="./scss/main.scss" />
-    <link rel="icon" href="./images/favicon.png" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Module.2 Final Evaluation</title>
 
-  <body>
-    
-    <!-- Aquí van tus elementos HTML -->
+  <link rel="stylesheet" href="./scss/main.scss" />
+  <link rel="icon" href="./images/favicon.png" />
+</head>
 
-    <header>
-      <h1>Hola a todas</h1>
-    </header>
-    
-    <main>Holis</main>
+<body class="darkmode">
 
-    <script src="./js/main.js"></script>
-  </body>
+  <!-- Aquí van tus elementos HTML -->
+
+  <header class="header">
+
+  </header>
+  <!-- header picture -->
+  <main class="main">
+
+    <form>
+      <label class="form__label" for="search">
+        <input class="js__searchInput form__search" type="text" name="Search" id="search" />
+      </label>
+      
+      <input class="form__btn js__searchBtn" type="submit" value="Search">
+    </form>
+
+    <div class="highlights">
+      <section class="cards">
+        <ul class="js__cardsUl cards">
+
+        </ul>
+      </section>
+  
+      <section class="favourites">
+        <ul class="js__favourites cards">
+
+        </ul>
+
+      </section>
+    </div>
+  </main>
+
+  <script src="./js/main.js"></script>
+</body>
+
 </html>

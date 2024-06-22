@@ -2,6 +2,9 @@
   Aquí van tus estilos o los @import './tus/ficheros'
 */
 
-body {
-  background-color: lightblue;
+.highlights {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  
 }
+
