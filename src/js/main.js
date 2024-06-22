@@ -11,13 +11,34 @@ const SearchBtn = document.querySelector('js__searchBtn');
 
 // DATA AND GLOBAL VARIABLES
 
-    //OBJECT ARRAYS
-    let cards = [];  
-    let favourites = [];
+//OBJECT ARRAYS
+let cards = [];
+let favourites = [];
+
+//FUNCTIONS
+
 
 
 
 //FUNCTIONS AND EVENTS
+
+
+//create LiCard and increment them one by one
+function renderCards(cards) {
+
+    let cardHTML = '';
+
+    for (const card of cards) {
+        cardHTML += `<li class="cards">
+        <img class = "imgLi" src="${card.imageUrl}" alt="Picture of ${card.name}">
+        <p class = "nameLi">${card.name}</p>
+      </li>`;
+    }
+
+    return cardHTML;
+
+}
+
 
 
 
@@ -30,34 +51,36 @@ const SearchBtn = document.querySelector('js__searchBtn');
 
 
 
-    //CLICK'S EVENT - CARDS
+//CARD WITHOUT AN IMAGE
+
+
+
+
+//CLICK'S EVENT - CARDS
 
 function handleClickCard(ev) {
-  ev.preventDefault();
+    ev.preventDefault();
 
 }
 
-cardsUl.addEventListener( 'click', handleClickCard );
+cardsUl.addEventListener('click', handleClickCard);
 
 
-    //CLICK'S EVENT - SEARCH
-/*
-function handleClickFavourite(ev) {
-    //code
-
-}
-
-favouritessUl.addEventListener( 'click', handleClickFavourite );
-*/
+//CLICK'S EVENT - SEARCH
 
 
-    //FETCH AND LOCALSTORAGE 
 
-fetch ('https://api.disneyapi.dev/character?pageSize=10')     
+//START LOADING PAGE 
+
+fetch('https://api.disneyapi.dev/character?pageSize=10')
     .then(response => response.json())
     .then(dataFromFetch => {
         console.log(dataFromFetch.data);
-    
-        }
-    )
+
+        cards = dataFromFetch.data;
+
+        cardsUl.innerHTML = renderCards(cards);
+    });
+
+    console.log(cards);
 
