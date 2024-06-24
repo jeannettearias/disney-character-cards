@@ -2,7 +2,7 @@
 
 // QUERY SELECTORS
 const cardsUl = document.querySelector('.js__cardsUl');
-const favouritessUl = document.querySelector('.js__favouritesUl');
+const favouritesUl = document.querySelector('.js__favouritesUl');
 
 const SearchInput = document.querySelector('.js__searchInput');
 const SearchBtn = document.querySelector('js__searchBtn');
@@ -24,22 +24,30 @@ let favourites = [];
 
 
 //create LiCard and increment them one by one
-function createLiForCards(cards) {
 
-    let cardHTML = '';
+function createLiForCards(card) {
 
-    for (const card of cards) {
-        cardHTML += `<li class="js__card cards" data-id= "${card._id}">
-        <img class = "imgLi" src="${card.imageUrl}" alt="Picture of ${card.name}">
-        <p class = "nameLi">${card.name}</p>
-      </li>`;
-    };
+    const cardHTML = `
+        <li class="js__card cards" data-id= "${card._id}">
+            <img class = "imgLi" src="${card.imageUrl}" alt="Picture of ${card.name}">
+            <p class = "nameLi">${card.name}</p>
+        </li>`;
+
 
     return cardHTML;
+
 }
 
+
 function renderCards(cards) {
-    cardsUl.innerHTML = createLiForCards(cards);
+    let html = '';
+
+    for (const card of cards) {
+        html += createLiForCards(card);
+    };
+
+    //Paint the cards
+    cardsUl.innerHTML = html;
 
     const allCards = document.querySelectorAll('.js__card');
 
@@ -53,34 +61,57 @@ function renderCards(cards) {
 function renderFavourites() {
     let favouriteHTML = '';
 
-    for ( const favouriteCard of favourites ) {
+    for (const favouriteCard of favourites) {
+
         favouriteHTML += createLiForCards(favouriteCard);
     }
 
-    favouritessUl.innerHTML = favouriteHTML;
+    //paint the favourite cards
+    favouritesUl.innerHTML = favouriteHTML;
 
 }
 
+//CLICK'S EVENT - CARDS
+function handleClickCard(ev) {
 
-//REMOVE CARDS FROM FAVORITES
+    const clickedImageId = parseInt(ev.currentTarget.dataset.id);
+
+    //search the clicked card (favourite one) by the ID
+
+    const clickedCard = cards.find(eachCard => 
+        eachCard._id === clickedImageId);
+        
+    // search the value in favourite object now
+    const clickedFavoriteIndex = favourites.findIndex(eachFavoriteCard => eachFavoriteCard._id === clickedImageId);
+
+
+    if (clickedFavoriteIndex === -1) {
+        favourites.push(clickedCard);
+
+        localStorage.setItem('favs', JSON.stringify(favourites));
+
+        renderFavourites();
+
+    }
+
+    //REMOVE CARDS FROM FAVORITES
+    else {
+        favourites.splice(clickedFavoriteIndex, 1);
+
+        localStorage.setItem('favs', JSON.stringify(favourites) );
+        
+        renderFavourites();
+
+    }
+
+    //add and remove the favorite card selected in the HTML 
+    ev.currentTarget.classList.toggle('favourite');
+
+}
 
 
 
 //CARD WITHOUT AN IMAGE
-
-
-
-
-//CLICK'S EVENT - CARDS
-
-function handleClickCard(ev) {
-    //ev.preventDefault();
-
-    const clickedImageId = ev.currentTarget.dataset.id;
-    console.log(clickedImageId);
-
-
-}
 
 
 
@@ -98,8 +129,20 @@ fetch('https://api.disneyapi.dev/character?pageSize=10')
         cards = dataFromFetch.data;
 
         renderCards(cards);
-
     });
+
+// code to save in local storage and convert in numeric the ID
+const favsFromLS = JSON.parse(localStorage.getItem('favs'));
+
+// code to manage the null ones in favorites object
+
+
+if (favsFromLS !== null) {
+    favourites = favsFromLS;
+    renderFavourites();
+  
+}
+
 
 
 
