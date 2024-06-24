@@ -5,27 +5,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Module 2 - Final Evaluation</title>
-
+  <link
+  href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto+Slab:wght@100..900&display=swap"
+  rel="stylesheet">
   <link rel="stylesheet" href="./scss/main.scss" />
   <link rel="icon" href="./images/favicon.png" />
 </head>
 
-<body class="darkmode">
+<body class="lighthmode">
+  <!-- Partials link -->
+  <load src="./partials/header.html" />
 
-  <!-- Aquí van tus elementos HTML -->
 
-  <header class="header">
-
-  </header>
-  <!-- header picture -->
   <main class="main">
 
-    <form>
+    <form class="search">
       <label class="form__label" for="search">
-        <input class="js__searchInput form__search" type="text" name="Search" id="search" />
+        <input class="js__searchInput form__search" type="text" name="Search" id="search" placeholder="Example: Olu Mel"/>
       </label>
 
-      <input class="form__btn js__searchBtn" type="submit" value="Search">
+      <input class="js__searchBtn form__btn " type="submit" value="Search">
     </form>
 
     <div class="highlights">
@@ -38,7 +37,7 @@
       </section>
 
       <section class="favourites">
-        <h2>Favorites 🌟</h2>
+        <h2>Favorites 💙</h2>
         <ul class="js__favouritesUl cards">
 
         </ul>
@@ -47,6 +46,7 @@
     </div>
   </main>
 
+  <!-- Js link -->
   <script src="./js/main.js"></script>
 </body>
 

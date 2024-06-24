@@ -20,8 +20,6 @@ let favourites = [];
 //FUNCTIONS
 
 
-
-
 //FUNCTIONS AND EVENTS
 
 
@@ -33,7 +31,6 @@ function createLiForCards(card) {
     if (card.imageUrl === undefined) {
         card.imageUrl = imageNotFound;
     }
-
 
 
     //INSERT CARD IN THE ARRAY OBJECT nd();
