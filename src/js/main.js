@@ -11,6 +11,8 @@ const SearchBtn = document.querySelector('.js__searchBtn');
 
 // DATA AND GLOBAL VARIABLES
 
+const imageNotFound = 'https://via.placeholder.com/210x295/ffffff/555555/?text=Disney'
+
 //OBJECT ARRAYS
 let cards = [];
 let favourites = [];
@@ -27,6 +29,14 @@ let favourites = [];
 
 function createLiForCards(card) {
 
+    //CARDs WITHOUT AN IMAGE
+    if (card.imageUrl === undefined) {
+        card.imageUrl = imageNotFound;
+    }
+
+
+
+    //INSERT CARD IN THE ARRAY OBJECT nd();
     const cardHTML = `
         <li class="js__card cards" data-id= "${card._id}">
             <img class = "imgLi" src="${card.imageUrl}" alt="Picture of ${card.name}">
@@ -43,7 +53,9 @@ function renderCards(cards) {
     let html = '';
 
     for (const card of cards) {
+
         html += createLiForCards(card);
+
     };
 
     //Paint the cards
@@ -63,20 +75,20 @@ function renderFavourites() {
 
     for (const favouriteCard of favourites) {
 
-     favouriteHTML += createLiForCards(favouriteCard);
-    
+        favouriteHTML += createLiForCards(favouriteCard);
+
     }
 
     //paint the favourite cards
     favouritesUl.innerHTML = favouriteHTML;
 
-// Attach click event listeners to each favorite card
-/*
-const favouriteCard = document.querySelectorAll('.js__favouritesUl'); 
-favouriteCard.forEach(card => {card.addEventListener('click', handleClickCard);
-    console.log(favouriteCard)
-});
-*/
+    // Attach click event listeners to each favorite card
+    /*
+    const favouriteCard = document.querySelectorAll('.js__favouritesUl'); 
+    favouriteCard.forEach(card => {card.addEventListener('click', handleClickCard);
+        console.log(favouriteCard)
+    });
+    */
 
 }
 
@@ -111,14 +123,7 @@ function handleClickCard(ev) {
     //add and remove the favorite card selected in the HTML 
     ev.currentTarget.classList.toggle('favourites');
 
-
 }
-
-
-
-//CARD WITHOUT AN IMAGE
-
-
 
 //CLICK'S EVENT - SEARCH
 function handleSearchClick(ev) {
@@ -126,17 +131,17 @@ function handleSearchClick(ev) {
 
     const searchCard = SearchInput.value.toLowerCase();
 
-    fetch (`https://api.disneyapi.dev/character?pageSize=50&name=${searchCard}`)
-    .then(response => response.json())
-    .then(dataFromSearch => {
-        cards = dataFromSearch.data;
-        renderCards(cards);
+    fetch(`https://api.disneyapi.dev/character?pageSize=50&name=${searchCard}`)
+        .then(response => response.json())
+        .then(dataFromSearch => {
+            cards = dataFromSearch.data;
+            renderCards(cards);
 
-    })
+        });
 
 }
 
-SearchBtn.addEventListener('click',handleSearchClick)
+SearchBtn.addEventListener('click', handleSearchClick)
 
 
 //START LOADING PAGE 
@@ -153,7 +158,6 @@ fetch('https://api.disneyapi.dev/character?pageSize=10')
 const favsFromLS = JSON.parse(localStorage.getItem('favs'));
 
 // code to manage the null ones in favorites object
-
 
 if (favsFromLS !== null) {
     favourites = favsFromLS;
