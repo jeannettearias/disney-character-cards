@@ -2,7 +2,11 @@
 @import './layout/header';
 @import './layout/search';
 
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;   
+}
 :root {
   font-family: "Roboto Serif", serif;
   font-optical-sizing: auto;
@@ -16,19 +20,74 @@
 
 
 .highlights {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
+display: flex;
 
 }
 
-.liCard {
-  background-color: white;
+.ccontainer {
+  width: 75%;
+}
+
+.fcontainer {
+  width: 25%;
+}
+
+.box-title {
+  margin-bottom: 2rem;
+  text-align: center;
 
 }
 
 .cards {
   display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+
+}
+
+.fcards {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: 1fr 1fr;
+
+}
+.fcards .licards {
+  background-color: rgba(228, 221, 188, 0.904);
+}
+
+.licards {
+  list-style: none;
+  background-color: #ffffff;
+  margin-left: 10%;
+  margin-right: 10%;
+  box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
+  text-align: center;
+  align-self: center;
+  margin-bottom: 10%;
+  height: 90%;
+  width: 90%;
+
+}
+
+.liCardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  max-width: 90%;
+  height: 100%;
   
 }
 
+.imgLi {
+  display: flex;
+  margin-top: 1rem;
+  width: 90%;
+  height: 90%;
+}
+
+.nameLi {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
 

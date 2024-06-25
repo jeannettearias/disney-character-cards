@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Module 2 - Final Evaluation</title>
   <link
-  href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto+Slab:wght@100..900&display=swap"
-  rel="stylesheet">
+    href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto+Slab:wght@100..900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="./scss/main.scss" />
   <link rel="icon" href="./images/favicon.png" />
 </head>
@@ -19,31 +19,34 @@
 
   <main class="main">
 
-    <form class="search">
+    <form class="container">
       <label class="form__label" for="search">
-        <input class="js__searchInput form__search" type="text" name="Search" id="search" placeholder="Example: Olu Mel"/>
+        <input class="js__searchInput input__search" type="text" name="search" id="search"
+          placeholder="Example: Olu Mel" />
       </label>
-
       <input class="js__searchBtn form__btn " type="submit" value="Search">
     </form>
 
     <div class="highlights">
-      <section class="cards">
-        <h2>Characters 💙</h2>
-        <ul class="js__cardsUl cards">
+      <div class="ccontainer">
+        <h2 class="box-title">Characters 💙</h2>
+        <section class="scards">
+          <ul class="js__cardsUl cards">
 
-        </ul>
+          </ul>
 
-      </section>
+        </section>
+      </div>
+      
+      <div class="fcontainer">
+        <h2 class="box-title">Favorites 💙</h2>
+        <section class="favourites">
+          <ul class="js__favouritesUl fcards">
 
-      <section class="favourites">
-        <h2>Favorites 💙</h2>
-        <ul class="js__favouritesUl cards">
+          </ul>
 
-        </ul>
-
-      </section>
-    </div>
+        </section>
+      </div>
   </main>
 
   <!-- Js link -->

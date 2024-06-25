@@ -26,7 +26,7 @@ let favourites = [];
 //create LiCard and increment them one by one
 
 function createLiForCards(card) {
-
+console.log(card)
     //CARDs WITHOUT AN IMAGE
     if (card.imageUrl === undefined) {
         card.imageUrl = imageNotFound;
@@ -35,16 +35,16 @@ function createLiForCards(card) {
 
     //INSERT CARD IN THE ARRAY OBJECT nd();
     const cardHTML = `
-        <li class="js__card cards" data-id= "${card._id}">
-            <img class = "imgLi" src="${card.imageUrl}" alt="Picture of ${card.name}">
-            <p class = "nameLi">${card.name}</p>
+        <li class="js__card licards" data-id= "${card._id}">
+            <div class = "liCardContent">
+                <img class = "imgLi" src="${card.imageUrl}" alt="Picture of ${card.name}">
+                <p class = "nameLi">${card.name}</p>
+            </div>
         </li>`;
-
 
     return cardHTML;
 
 }
-
 
 function renderCards(cards) {
     let html = '';
@@ -69,7 +69,7 @@ function renderCards(cards) {
 //ADD CARDS TO FAVORITES
 function renderFavourites() {
     let favouriteHTML = '';
-
+    console.log(favourites)
     for (const favouriteCard of favourites) {
 
         favouriteHTML += createLiForCards(favouriteCard);
@@ -122,6 +122,15 @@ function handleClickCard(ev) {
 
 }
 
+//REMOVE ALL FAVOURITES BUTTON
+function removeAllFavorites() {
+    //code
+
+}
+
+removeAllFavorites();
+
+
 //CLICK'S EVENT - SEARCH
 function handleSearchClick(ev) {
     ev.preventDefault();
@@ -131,7 +140,14 @@ function handleSearchClick(ev) {
     fetch(`https://api.disneyapi.dev/character?pageSize=50&name=${searchCard}`)
         .then(response => response.json())
         .then(dataFromSearch => {
-            cards = dataFromSearch.data;
+            let cards = [];
+
+            if (dataFromSearch.data.length < 1 || dataFromSearch.data.length === undefined) {
+                cards.push(dataFromSearch.data);
+            } else {
+                cards = dataFromSearch.data;
+            }
+
             renderCards(cards);
 
         });
@@ -141,6 +157,7 @@ function handleSearchClick(ev) {
 SearchBtn.addEventListener('click', handleSearchClick)
 
 
+
 //START LOADING PAGE 
 
 fetch('https://api.disneyapi.dev/character?pageSize=10')
@@ -148,7 +165,9 @@ fetch('https://api.disneyapi.dev/character?pageSize=10')
     .then(dataFromFetch => {
 
         cards = dataFromFetch.data;
+
         renderCards(cards);
+
     });
 
 // code to save in local storage and convert in numeric the ID
