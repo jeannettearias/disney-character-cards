@@ -26,7 +26,7 @@ let favourites = [];
 //create LiCard and increment them one by one
 
 function createLiForCards(card) {
-console.log(card)
+
     //CARDs WITHOUT AN IMAGE
     if (card.imageUrl === undefined) {
         card.imageUrl = imageNotFound;
@@ -36,7 +36,7 @@ console.log(card)
     //INSERT CARD IN THE ARRAY OBJECT nd();
     const cardHTML = `
         <li class="js__card licards" data-id= "${card._id}">
-            <div class = "liCardContent">
+            <div class = "liCardContent ">
                 <img class = "imgLi" src="${card.imageUrl}" alt="Picture of ${card.name}">
                 <p class = "nameLi">${card.name}</p>
             </div>
@@ -69,7 +69,7 @@ function renderCards(cards) {
 //ADD CARDS TO FAVORITES
 function renderFavourites() {
     let favouriteHTML = '';
-    console.log(favourites)
+
     for (const favouriteCard of favourites) {
 
         favouriteHTML += createLiForCards(favouriteCard);
@@ -86,12 +86,10 @@ function renderFavourites() {
         console.log(favouriteCard)
     });
     */
-
 }
 
 //CLICK'S EVENT - CARDS
 function handleClickCard(ev) {
-
     const clickedImageId = parseInt(ev.currentTarget.dataset.id);
 
     //search the clicked card (favourite one) by the ID
@@ -99,7 +97,8 @@ function handleClickCard(ev) {
         eachCard._id === clickedImageId);
 
     // search the value in favourite object now
-    const clickedFavoriteIndex = favourites.findIndex(eachFavoriteCard => eachFavoriteCard._id === clickedImageId);
+    const clickedFavoriteIndex = favourites.findIndex(eachFavoriteCard =>
+        eachFavoriteCard._id === clickedImageId);
 
     if (clickedFavoriteIndex === -1) {
         favourites.push(clickedCard);
@@ -122,13 +121,29 @@ function handleClickCard(ev) {
 
 }
 
-//REMOVE ALL FAVOURITES BUTTON
-function removeAllFavorites() {
-    //code
+function handleClickFavourites(ev) {
+
+    //search in higher levels for the parent li with Id
+    const clickedImageId = parseInt(ev.target.closest("li").dataset.id);
+
+    console.log(ev.target.closest("li"));
+
+    const clickedFavoriteIndex = favourites.findIndex(eachFavoriteCard =>
+        eachFavoriteCard._id === clickedImageId);
+
+    // load and compare each favorite card with id value 
+        favourites.splice(clickedFavoriteIndex, 1);
+
+        localStorage.setItem('favs', JSON.stringify(favourites));
+
+        renderFavourites();
 
 }
 
-removeAllFavorites();
+favouritesUl.addEventListener('click', handleClickFavourites);
+
+//REMOVE ALL FAVOURITES BUTTON
+
 
 
 //CLICK'S EVENT - SEARCH
@@ -140,22 +155,21 @@ function handleSearchClick(ev) {
     fetch(`https://api.disneyapi.dev/character?pageSize=50&name=${searchCard}`)
         .then(response => response.json())
         .then(dataFromSearch => {
-            let cards = [];
+            let cardsSearched = [];
 
             if (dataFromSearch.data.length < 1 || dataFromSearch.data.length === undefined) {
-                cards.push(dataFromSearch.data);
+                cardsSearched.push(dataFromSearch.data);
             } else {
-                cards = dataFromSearch.data;
+                cardsSearched = dataFromSearch.data;
             }
+            cards = cardsSearched;
 
             renderCards(cards);
 
         });
-
 }
 
 SearchBtn.addEventListener('click', handleSearchClick)
-
 
 
 //START LOADING PAGE 
