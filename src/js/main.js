@@ -39,7 +39,7 @@ function createLiForCards(card) {
     return cardHTML;
 
 }
-
+//render cards 
 function renderCards(cards) {
     let html = '';
 
@@ -191,6 +191,7 @@ const favsFromLS = JSON.parse(localStorage.getItem('favs'));
 // code to manage the null ones in favorites object
 if (favsFromLS !== null) {
     favourites = favsFromLS;
+
     renderFavourites();
 
 }
