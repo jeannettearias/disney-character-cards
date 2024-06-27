@@ -30,6 +30,7 @@ display: flex;
 
 .fcontainer {
   width: 25%;
+
 }
 
 .box-title {
@@ -48,7 +49,7 @@ display: flex;
 .fcards {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: 1fr 1fr;
+
 
 }
 .fcards .licards {
@@ -76,14 +77,18 @@ display: flex;
   margin: auto;
   max-width: 90%;
   height: 100%;
-  
+  padding: 0.2em; 
+
 }
 
 .imgLi {
   display: flex;
   margin-top: 1rem;
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+
 }
 
 .nameLi {
@@ -91,3 +96,19 @@ display: flex;
   margin-bottom: 1rem;
 }
 
+.favourites__section {
+  display: grid;
+  grid-template-columns: auto;
+  place-items: center; /* Center both horizontally and vertically */
+  
+}
+
+.removeAllFav__btn { 
+  height: 1.5rem;
+  width: 8rem; 
+  background-color: blue;
+  color: white;
+  cursor: pointer; 
+  padding: 0.5em;
+
+}

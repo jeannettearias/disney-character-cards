@@ -17,21 +17,15 @@ const imageNotFound = 'https://via.placeholder.com/210x295/ffffff/555555/?text=D
 let cards = [];
 let favourites = [];
 
-//FUNCTIONS
-
-
 //FUNCTIONS AND EVENTS
 
-
 //create LiCard and increment them one by one
-
 function createLiForCards(card) {
 
     //CARDs WITHOUT AN IMAGE
     if (card.imageUrl === undefined) {
         card.imageUrl = imageNotFound;
     }
-
 
     //INSERT CARD IN THE ARRAY OBJECT nd();
     const cardHTML = `
@@ -50,9 +44,7 @@ function renderCards(cards) {
     let html = '';
 
     for (const card of cards) {
-
         html += createLiForCards(card);
-
     };
 
     //Paint the cards
@@ -63,7 +55,6 @@ function renderCards(cards) {
     for (const eachCard of allCards) {
         eachCard.addEventListener('click', handleClickCard);
     }
-
 }
 
 //ADD CARDS TO FAVORITES
@@ -73,19 +64,11 @@ function renderFavourites() {
     for (const favouriteCard of favourites) {
 
         favouriteHTML += createLiForCards(favouriteCard);
-
     }
 
     //paint the favourite cards
     favouritesUl.innerHTML = favouriteHTML;
 
-    // Attach click event listeners to each favorite card
-    /*
-    const favouriteCard = document.querySelectorAll('.js__favouritesUl'); 
-    favouriteCard.forEach(card => {card.addEventListener('click', handleClickCard);
-        console.log(favouriteCard)
-    });
-    */
 }
 
 //CLICK'S EVENT - CARDS
@@ -113,36 +96,54 @@ function handleClickCard(ev) {
         localStorage.setItem('favs', JSON.stringify(favourites));
 
         renderFavourites();
-
     }
-
     //add and remove the favorite card selected in the HTML 
     ev.currentTarget.classList.toggle('favourites');
-
 }
 
 function handleClickFavourites(ev) {
 
-    //search in higher levels for the parent li with Id
-    const clickedImageId = parseInt(ev.target.closest("li").dataset.id);
+    if (ev.target.closest("li") !== null) {
+        const clickedImageId = parseInt(ev.target.closest("li").dataset.id);
 
-    console.log(ev.target.closest("li"));
+        console.log(ev.target.closest("li"));
 
-    const clickedFavoriteIndex = favourites.findIndex(eachFavoriteCard =>
-        eachFavoriteCard._id === clickedImageId);
+        const clickedFavoriteIndex = favourites.findIndex(eachFavoriteCard =>
+            eachFavoriteCard._id === clickedImageId);
 
-    // load and compare each favorite card with id value 
+        // load and compare each favorite card with id value 
         favourites.splice(clickedFavoriteIndex, 1);
 
         localStorage.setItem('favs', JSON.stringify(favourites));
 
         renderFavourites();
-
+    }
 }
 
 favouritesUl.addEventListener('click', handleClickFavourites);
 
+
 //REMOVE ALL FAVOURITES BUTTON
+
+// Function to clear the favs array
+function clearFavourites() {
+    favourites.length = 0;
+
+    renderFavourites();
+    //clean localstorage again
+    localStorage.setItem('favs', JSON.stringify(favourites));
+
+}
+
+// Function to handle the button click event
+function handleRemoveAllFavClick(ev) {
+    clearFavourites();
+}
+
+// Get the button element and listen for the click event :) 
+const removeAllFavBtn = document.getElementById('js__removeAllFavBtn');
+
+removeAllFavBtn.addEventListener('click', handleRemoveAllFavClick);
 
 
 
@@ -188,13 +189,11 @@ fetch('https://api.disneyapi.dev/character?pageSize=10')
 const favsFromLS = JSON.parse(localStorage.getItem('favs'));
 
 // code to manage the null ones in favorites object
-
 if (favsFromLS !== null) {
     favourites = favsFromLS;
     renderFavourites();
 
 }
-
 
 
 
