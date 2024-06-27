@@ -4,9 +4,9 @@
     display: flex;
     padding: auto;
     justify-content: center;
-    align-items: center; /* Align items vertically */
+    align-items: center; 
     margin: 1rem;
-    gap: 1%; /* Adjust the gap as needed */
+    gap: 1%; 
     border: solid 2.5rem white;
     transform: translateY(-50%);
     box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
@@ -35,10 +35,11 @@
 
 .form__btn {
     flex-grow: 0; 
-    height: 1.8rem; 
+    height: auto; 
     background-color: blue;
     color: white;
     cursor: pointer; 
-    padding: 0.5em;
+    padding: 0.3em;
+    text-align: center;
 }
 

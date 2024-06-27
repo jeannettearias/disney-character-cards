@@ -17,19 +17,21 @@
     "GRAD" 0;
 }
 
-
-
 .highlights {
 display: flex;
+padding: 2rem;
+justify-content: center;
 
 }
 
 .ccontainer {
-  width: 75%;
+  width: 70%;
+
 }
 
 .fcontainer {
-  width: 25%;
+  width: 30%;
+  align-items: center;
 
 }
 
@@ -49,11 +51,12 @@ display: flex;
 .fcards {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-
+  
 
 }
 .fcards .licards {
   background-color: rgba(228, 221, 188, 0.904);
+
 }
 
 .licards {
@@ -104,11 +107,51 @@ display: flex;
 }
 
 .removeAllFav__btn { 
-  height: 1.5rem;
+  height: auto;
   width: 8rem; 
   background-color: blue;
   color: white;
   cursor: pointer; 
-  padding: 0.5em;
+  padding: 0.3em;
 
 }
+
+@media (max-width: 760px) {
+ 
+  .cards {
+    grid-template-columns: 1fr; 
+    grid-template-rows: auto;  
+  }
+
+  .fcards {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;   
+  }
+
+
+  .licards {
+    margin: 5% auto;  
+    width: 90%;      
+    height: auto;    
+  }
+
+  .imgLi {
+    width: 100%;
+    height: auto;
+  }
+
+  .ccontainer {
+    width: 50%;
+  
+  }
+  
+  .fcontainer {
+    width: 50%;
+    align-items: center;
+  
+  }
+
+  
+
+}
+
