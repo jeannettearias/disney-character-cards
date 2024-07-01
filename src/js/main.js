@@ -8,7 +8,6 @@ const SearchInput = document.querySelector('.js__searchInput');
 const SearchBtn = document.querySelector('.js__searchBtn');
 
 
-
 // DATA AND GLOBAL VARIABLES
 
 const imageNotFound = 'https://via.placeholder.com/210x295/ffffff/555555/?text=Disney'
@@ -34,6 +33,7 @@ function createLiForCards(card) {
                 <img class = "imgLi" src="${card.imageUrl}" alt="Picture of ${card.name}">
                 <p class = "nameLi">${card.name}</p>
             </div>
+            <button class="close_btn data-id="${card._id}">&times;</button>
         </li>`;
 
     return cardHTML;
@@ -69,7 +69,35 @@ function renderFavourites() {
     //paint the favourite cards
     favouritesUl.innerHTML = favouriteHTML;
 
+    //Attach click event listeners to each close button
+    const close_btn = document.querySelectorAll('.close_btn');
+    close_btn.forEach(button => {
+        button.addEventListener('click', handleCloseButtonClick);
+
+    });
+
 }
+
+//CLICK'S EVENT - CLOSE BUTTON FAVOURITE CARDS
+function handleCloseButtonClick(ev) {
+    const cardId = parseInt(ev.currentTarget.dataset.id);
+
+    //find the index of the card to remove 
+    const cardIndex = favourites.findIndex(card => card._id === cardId);
+
+    if ( cardIndex !== -1 ) {
+        //remove the card from the favourites array 
+        favourites.splice(cardIndex, 1);
+
+        //update de localstorage
+        localStorage.setItem('favs', JSON.stringify(favourites));
+
+        //re-render the favourite cards
+        renderFavourites();
+        
+    }
+}
+
 
 //CLICK'S EVENT - CARDS
 function handleClickCard(ev) {
@@ -105,8 +133,6 @@ function handleClickFavourites(ev) {
 
     if (ev.target.closest("li") !== null) {
         const clickedImageId = parseInt(ev.target.closest("li").dataset.id);
-
-        console.log(ev.target.closest("li"));
 
         const clickedFavoriteIndex = favourites.findIndex(eachFavoriteCard =>
             eachFavoriteCard._id === clickedImageId);
@@ -145,8 +171,6 @@ const removeAllFavBtn = document.getElementById('js__removeAllFavBtn');
 
 removeAllFavBtn.addEventListener('click', handleRemoveAllFavClick);
 
-
-
 //CLICK'S EVENT - SEARCH
 function handleSearchClick(ev) {
     ev.preventDefault();
@@ -171,7 +195,6 @@ function handleSearchClick(ev) {
 }
 
 SearchBtn.addEventListener('click', handleSearchClick)
-
 
 //START LOADING PAGE 
 
