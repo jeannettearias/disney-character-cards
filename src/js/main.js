@@ -19,7 +19,7 @@ let favourites = [];
 //FUNCTIONS AND EVENTS
 
 //create LiCard and increment them one by one
-function createLiForCards(card) {
+function createLiForCards(card, includeCloseButton = false) {
 
     //CARDs WITHOUT AN IMAGE
     if (card.imageUrl === undefined) {
@@ -33,7 +33,7 @@ function createLiForCards(card) {
                 <img class = "imgLi" src="${card.imageUrl}" alt="Picture of ${card.name}">
                 <p class = "nameLi">${card.name}</p>
             </div>
-            <button class="close_btn data-id="${card._id}">&times;</button>
+            ${includeCloseButton ? `<button class="close_btn data-id="${card._id}">&times;</button>` : ''}
         </li>`;
 
     return cardHTML;
@@ -62,8 +62,7 @@ function renderFavourites() {
     let favouriteHTML = '';
 
     for (const favouriteCard of favourites) {
-
-        favouriteHTML += createLiForCards(favouriteCard);
+        favouriteHTML += createLiForCards(favouriteCard, true); //pass true to include the close button
     }
 
     //paint the favourite cards
@@ -94,7 +93,7 @@ function handleCloseButtonClick(ev) {
 
         //re-render the favourite cards
         renderFavourites();
-        
+    
     }
 }
 
