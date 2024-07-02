@@ -7,6 +7,7 @@ const favouritesUl = document.querySelector('.js__favouritesUl');
 const SearchInput = document.querySelector('.js__searchInput');
 const SearchBtn = document.querySelector('.js__searchBtn');
 
+const logBtn = document.querySelector('.js__logBtn');
 
 
 // DATA AND GLOBAL VARIABLES
@@ -33,6 +34,7 @@ function createLiForCards(card) {
             <div class = "liCardContent ">
                 <img class = "imgLi" src="${card.imageUrl}" alt="Picture of ${card.name}">
                 <p class = "nameLi">${card.name}</p>
+                <p class = "cardDate">${card.updatedAt}</p>
             </div>
         </li>`;
 
@@ -98,7 +100,7 @@ function handleClickCard(ev) {
         renderFavourites();
     }
     //add and remove the favorite card selected in the HTML 
-    ev.currentTarget.classList.toggle('favourites');
+  //  ev.currentTarget.classList.toggle('favourites');
 }
 
 function handleClickFavourites(ev) {
@@ -122,6 +124,16 @@ function handleClickFavourites(ev) {
 
 favouritesUl.addEventListener('click', handleClickFavourites);
 
+//Click's event Log Button
+function handleLogClickBtn(ev) {
+    ev.preventDefault();
+
+   let displayNumberOfFavourites = favourites.length
+    console.log("Tienes " + displayNumberOfFavourites + " Favourites");
+
+}
+
+logBtn.addEventListener('click', handleLogClickBtn)
 
 //REMOVE ALL FAVOURITES BUTTON
 
