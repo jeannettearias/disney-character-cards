@@ -123,23 +123,32 @@ justify-content: center;
   .cards {
     grid-template-columns: 1fr; 
     grid-template-rows: auto;  
+ 
+
+
   }
 
   .fcards {
     grid-template-columns: 1fr;
-    grid-template-rows: auto;   
+    grid-template-rows: auto;
+    position: relative;
+
   }
 
 
   .licards {
+    position: relative;
     margin: 5% auto;  
     width: 90%;      
     height: auto;    
+
   }
 
   .imgLi {
+    position: relative;
     width: 100%;
     height: auto;
+
   }
 
   .ccontainer {
@@ -153,7 +162,22 @@ justify-content: center;
   
   }
 
+}
 
+.close_btn {
+  position: absolute;
+  right: 0px;
+  z-index: 1;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: red;
+
+}
+
+.close_btn span {
+  color: red;
 
 }
 

@@ -10,7 +10,8 @@ const SearchBtn = document.querySelector('.js__searchBtn');
 
 // DATA AND GLOBAL VARIABLES
 
-const imageNotFound = 'https://via.placeholder.com/210x295/ffffff/555555/?text=Disney'
+const imageNotFound = 'https://via.placeholder.com/210x295/ffffff/555555/?text=Disney';
+const BASE_URL = 'api.disneyapi.dev/character';
 
 //OBJECT ARRAYS
 let cards = [];
@@ -32,8 +33,8 @@ function createLiForCards(card, includeCloseButton = false) {
             <div class = "liCardContent ">
                 <img class = "imgLi" src="${card.imageUrl}" alt="Picture of ${card.name}">
                 <p class = "nameLi">${card.name}</p>
-            </div>
-            ${includeCloseButton ? `<button class="close_btn data-id="${card._id}">&times;</button>` : ''}
+             ${includeCloseButton ? `<button class="close_btn data-id="${card._id}">&times;</button>` : ''}
+                </div>
         </li>`;
 
     return cardHTML;
@@ -84,7 +85,7 @@ function handleCloseButtonClick(ev) {
     //find the index of the card to remove 
     const cardIndex = favourites.findIndex(card => card._id === cardId);
 
-    if ( cardIndex !== -1 ) {
+    if (cardIndex !== -1) {
         //remove the card from the favourites array 
         favourites.splice(cardIndex, 1);
 
@@ -93,7 +94,7 @@ function handleCloseButtonClick(ev) {
 
         //re-render the favourite cards
         renderFavourites();
-    
+
     }
 }
 
@@ -197,7 +198,7 @@ SearchBtn.addEventListener('click', handleSearchClick)
 
 //START LOADING PAGE 
 
-fetch('https://api.disneyapi.dev/character?pageSize=10')
+fetch(`https://${BASE_URL}?pageSize=10`)
     .then(response => response.json())
     .then(dataFromFetch => {
 
